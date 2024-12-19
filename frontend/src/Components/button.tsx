@@ -18,8 +18,8 @@ const sizeStyles = {
 }
 //this includes btn color,text color
 const variantStyles = {
-    "primary":"bg-purple-600 text-white",
-    "secondary":"bg-purple-100 text-purple-600"
+    "primary":"bg-purple-600 text-white hover:bg-purple-700",
+    "secondary":"bg-purple-100 text-purple-500 "
 }
 
 export const Button = (props:ButtonProps) =>{
