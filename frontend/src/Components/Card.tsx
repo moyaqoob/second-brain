@@ -39,7 +39,7 @@ export const Card =({link,type,title,startIcon,endIcon}:CardProps)=>{
                             allowFullScreen
                         ></iframe>}
                             {type==="twitter" && <blockquote className="twitter-tweet">
-                            <a href="https://twitter.com/username/status/1234567890123456789"/>
+                            <a href={link.replace("x","twitter")}/>
                             </blockquote>
                             }
                     </div>

@@ -7,7 +7,7 @@ import documnentIcon from  "../assets/icons8-documents-50.png"
 export const Sidebar = ()=>{
 
     return <>
-        <div className="w-72 h-screen absolute bg-gray-50 text-gray-500 cursor-pointer">
+        <div className="w-70  h-screen absolute bg-gray-50 text-gray-500 cursor-pointer">
             <div className="text-2xl font-bold flex justify-center">
                 Brainly
             </div>

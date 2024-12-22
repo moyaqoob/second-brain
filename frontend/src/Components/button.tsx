@@ -14,7 +14,7 @@ export interface ButtonProps {
 const sizeStyles = {
     "sm" : "px-2 py-1 text-sm rounded-md",
     "md" : "px-5 py-2 text-md rounded-lg",
-    "lg" : "px-2 py-4 text-lg rounded-xl"
+    "lg" : "px-2 py-3 text-lg rounded-xl"
 }
 //this includes btn color,text color
 const variantStyles = {
