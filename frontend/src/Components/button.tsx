@@ -1,40 +1,51 @@
-import { ReactElement } from "react"
-
+import { ReactElement } from 'react';
 
 export interface ButtonProps {
-    color: string
-    title:String
-    variant : "primary" | "secondary"
-    size : "sm" | "md" | "lg"
-    startIcon ?: ReactElement
-    endIcon?:ReactElement
-    onClick?:()=>void    
-}
-//this includes padding and margin and the button is rounded or not.
-const sizeStyles = {
-    "sm" : "px-2 py-1 text-sm rounded-md",
-    "md" : "px-5 py-2 text-md rounded-lg",
-    "lg" : "px-2 py-3 text-lg rounded-xl"
-}
-//this includes btn color,text color
-const variantStyles = {
-    "primary":"bg-purple-600 text-white hover:bg-purple-700",
-    "secondary":"bg-purple-100 text-purple-500 "
+    title: string;
+    variant: "primary" | "secondary";
+    size: "sm" | "md" | "lg";
+    startIcon?: ReactElement;
+    className?: string;
+    onClick?: () => void;
 }
 
-export const Button = (props:ButtonProps) =>{
-   return <button className={variantStyles[props.variant] + ""+ sizeStyles[props.size]} >
-        <div className="flex items-center">
-            <span>
-                {props.startIcon} 
-            </span>
-            <div className={"font-medium"}>
-                {props.title}
+const variantStyles = {
+    primary: "bg-blue-600 text-white hover:bg-purple-600",
+    secondary: "bg-gray-200 text-purple-600 hover:bg-gray-300"
+};
+
+const sizeStyles = {
+    sm: "px-3 py-1.5 text-sm",
+    md: "px-4 py-2 text-base",
+    lg: "px-6 py-3 text-lg"
+};
+
+export const Button = ({
+    title,
+    startIcon,
+    onClick,
+    size = "md",
+    variant = "primary",
+    className = ""
+}: ButtonProps) => {
+    return (
+        <button 
+            onClick={onClick} 
+            className={`${variantStyles[variant]} ${sizeStyles[size]} rounded-md transition-colors duration-200 ${className}`}
+        >
+            <div className="flex items-center gap-2 justify-center">
+                {startIcon && (
+                    <span className="flex items-center">
+                        {startIcon}
+                    </span>
+                )}
+                <div className="font-medium">
+                    {title}
+                </div>
             </div>
-            {props.endIcon}
-        </div>
-   </button>
-}
+        </button>
+    );
+};
 
 
 

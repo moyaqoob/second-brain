@@ -18,13 +18,13 @@ app.post("/api/v1/signup", async (req, res) => {
     // TODO: zod validation , hash the password
     const username:string = req.body.username;
     const password:string = req.body.password;
-    const salt = 10;
-    const hashpassword = await bcrypt.hash(password,salt);
+    const saltRounds = 10;
+    // const hashpassword = await bcrypt.hash(password,saltRounds);
     try{
         
         await UserModel.create({
             username: username,
-            password: hashpassword
+            password: password
         }) 
 
         res.json({
@@ -36,31 +36,26 @@ app.post("/api/v1/signup", async (req, res) => {
                 message: "User already exists"
             })
     }
+    console.log("this is running fine")
     
 })
 
 app.post("/api/v1/signin", async (req: Request, res: Response) => {
     const { username, password } = req.body;
     try{
-        const existingUser:any = await UserModel.findOne({ username,password });
-        
-    
+        const existingUser:any = await UserModel.findOne({ username });
         // // Verify the password
-        const verifyPassword =  bcrypt.compare(password, existingUser?.password);
-
-    
+        // const verifyPassword =  bcrypt.compareSync(password, existingUser.password);
         // // Generate a token
         const token = jwt.sign({ id: existingUser?._id }, JWT_PASSWORD);
 
-        res.json({ username, token });
+        res.status(404).json({ username, token });
     }
     catch(e){
         res.json({
             message:"the user doesn't exist"
         })
-    }
-    // // Find the user by username
-
+    }    // // Find the user by username
 });
 
 
@@ -78,30 +73,30 @@ app.post("/api/v1/content", userMiddleware, async (req, res) => {
     res.json({
         message: "Content added"
     })
-    
 })
 
 app.get("/api/v1/content", userMiddleware, async (req, res) => {
     const userId = req.userId;
-    const content = await ContentModel.find({
-        userId: userId
-    }).populate("userId", "username")
+    const content = await (await ContentModel.create({
+        userId: userId,
+        
+    })).populate("userId", "username")
     res.json({
-        content
+        content,
     })
 })
 
 app.delete("/api/v1/content", userMiddleware, async (req, res) => {
     const contentId = req.body.contentId;
-
+    const id = req.params.id;
     await ContentModel.deleteMany({
         contentId,
         userId: req.userId
     })
-
     res.json({
         message: "Deleted"
     })
+    
 })
 
 app.post("/api/v1/brain/share", userMiddleware, async (req, res) => {

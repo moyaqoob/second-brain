@@ -1,5 +1,5 @@
 export const random =(len:number)=>{
-    const object = "fnanfkemenfsnkdnsb335234252342"
+    const object = "abcdefghijklmnopqrstuvwxyz1234567890"
     let length = object.length;
     let ans = ""
     for (let i=0;i<object.length;i++){
