@@ -1,14 +1,34 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '../Components/button'
 import { Card } from '../Components/Card'
 import { CreateModel } from '../Components/CreateModel'
 import { Sidebar } from '../Components/SideBar'
 import DeleteIcon from '../Icons/DeleteIcon'
 import StartIcon from "../Icons/StartIcon"
+import axios from 'axios'
+import { BACKEND_URL } from '../config'
 // import { Link } from 'react-router-dom'
 export function Dashboard(){
   const [modalOpen,setModalOpen] = useState(false);
+  useEffect(()=>{
+
+    setTimeout(()=>{
+
+      axios.post(`${BACKEND_URL}/api/v1/ping`)
+      .then((res)=>{
+        if(res.status===200){
+          console.log("backend connected successfully")
+          console.log(res.data)
+        }else{
+          console.log("backend not connected")
+        }
+      })
+      .catch((err)=>{
   
+        console.log("model not connected",err);
+      })
+    },1000)
+  })
   return (
     <>
     <Sidebar/>

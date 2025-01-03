@@ -14,10 +14,10 @@ export interface CardProps {
 export const Card =({link,type,title,startIcon,endIcon}:CardProps)=>{
     return (
         <>
-            <div className= "max-w-50 w-72 h-[300px] overflow-hidden p-4 border-gray-300 shadow-sm rounded-md border">
-                    <div className="flex justify-between">
+            <div className= "max-w-50 w-72 h-[300px] overflow-hidden p-4 border-gray-300 shadow-sm rounded-md border ">
+                    <div className="flex justify-between font-semibold">
                         <div className="flex items-center text-md ">
-                            <div className="text-gray-600 pr-2 text-2xl">
+                            <div className="text-gray-600 pr-2 text-lg">
                                 {startIcon || <ShareIcon/>}
                             </div>
                             {title}
@@ -28,7 +28,7 @@ export const Card =({link,type,title,startIcon,endIcon}:CardProps)=>{
                             </div>
                         </div>
                     </div>
-                    <div className="flex h-10 justify-center ml-2 mr-3 relative top-2 right-2 ">
+                    <div className="flex h-10 justify-center ml-2 mr-3 relative mx-auto w-full ">
                         {type==="youtube" && <iframe 
                             width="250"
                             height="200"

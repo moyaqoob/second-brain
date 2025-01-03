@@ -2,22 +2,32 @@ import { useRef } from "react"
 import { Button } from "../Components/button"
 import axios from "axios";
 import {BACKEND_URL} from "../config"
-import { data } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-
+  const navigate = useNavigate();
   async function signup(){
     const username = usernameRef.current?.value;
     const password = passwordRef.current?.value;
     console.log(usernameRef.current?.value)
-    await axios.post(`${BACKEND_URL}/api/v1/signup`,{
-      username,
-      password
-    })
-    alert("User Signed up successfully")
-    console.log("ksdf djnf")
+    try{
+      if(!username || !password){
+        console.log("username and password required");
+        return 
+      }
+      await axios.post(`${BACKEND_URL}/api/v1/signup`,{
+        username,
+        password
+      })
+      alert("User Signed up successfully")
+      navigate("/signup");
+    } catch(e){
+      console.log("error occured while signing up",e);
+
+      
+    }
   }
 
   return (

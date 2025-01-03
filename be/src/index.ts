@@ -10,14 +10,25 @@ import { random } from "./utils";
 import { Response,Request } from "express";
 const app = express();
 app.use(express.json());
-app.use(cors());
+import path from "path";
+app.use(cors({
+    origin:"http://localhost:5173",
+    credentials:true
 
+}))
+
+
+app.use(express.static(path.join(__dirname, "../frontend/src")))
+
+app.get("*",(req,res)=>{
+    res.sendFile(path.join(__dirname,"../frontend/src","index.html"))
+})
 
 
 app.post("/api/v1/signup", async (req, res) => {
     // TODO: zod validation , hash the password
-    const username:string = req.body.username;
-    const password:string = req.body.password;
+    const username = req.body.username;
+    const password= req.body.password;
     const saltRounds = 10;
     // const hashpassword = await bcrypt.hash(password,saltRounds);
     try{
@@ -73,6 +84,7 @@ app.post("/api/v1/content", userMiddleware, async (req, res) => {
     res.json({
         message: "Content added"
     })
+    
 })
 
 app.get("/api/v1/content", userMiddleware, async (req, res) => {
@@ -97,6 +109,12 @@ app.delete("/api/v1/content", userMiddleware, async (req, res) => {
         message: "Deleted"
     })
     
+})
+
+app.post("/api/v1/ping",(req,res)=>{
+    res.status(200).json({
+        message:"pinged successfully"
+    })
 })
 
 app.post("/api/v1/brain/share", userMiddleware, async (req, res) => {
