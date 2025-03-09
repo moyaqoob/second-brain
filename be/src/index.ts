@@ -9,28 +9,26 @@ import bcrypt from "bcrypt"
 import { random } from "./utils";
 import { Response,Request } from "express";
 const app = express();
-app.use(express.json());
 import path from "path";
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin:"http://localhost:5174",
     credentials:true
-
+    
 }))
 
+app.use(express.json());
 
-app.use(express.static(path.join(__dirname, "../frontend/src")))
+app.use(express.static(path.join(__dirname, "../frontend/build")));
 
-app.get("*",(req,res)=>{
-    res.sendFile(path.join(__dirname,"../frontend/src","index.html"))
-})
+app.get("*", (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, "/frontend/build", "index.html"));
+});
 
 
-app.post("/api/v1/signup", async (req, res) => {
-    // TODO: zod validation , hash the password
+app.post("/api/v1/signup", async (req:Request, res:Response) => {
     const username = req.body.username;
     const password= req.body.password;
-    const saltRounds = 10;
-    // const hashpassword = await bcrypt.hash(password,saltRounds);
+    
     try{
         
         await UserModel.create({
@@ -56,9 +54,9 @@ app.post("/api/v1/signin", async (req: Request, res: Response) => {
     try{
         const existingUser:any = await UserModel.findOne({ username });
         // // Verify the password
-        // const verifyPassword =  bcrypt.compareSync(password, existingUser.password);
+        const verifyPassword =  bcrypt.compare(password, existingUser.password);
         // // Generate a token
-        const token = jwt.sign({ id: existingUser?._id }, JWT_PASSWORD);
+        const token = jwt.sign({ id: existingUser?._id },JWT_PASSWORD);
 
         res.status(404).json({ username, token });
     }
@@ -70,7 +68,7 @@ app.post("/api/v1/signin", async (req: Request, res: Response) => {
 });
 
 
-app.post("/api/v1/content", userMiddleware, async (req, res) => {
+app.post("/api/v1/content", userMiddleware, async (req:Request, res:Response) => {
     const link = req.body.link;
     const type = req.body.type;
     await ContentModel.create({
@@ -87,7 +85,7 @@ app.post("/api/v1/content", userMiddleware, async (req, res) => {
     
 })
 
-app.get("/api/v1/content", userMiddleware, async (req, res) => {
+app.get("/api/v1/content", userMiddleware, async (req:Request, res:Response) => {
     const userId = req.userId;
     const content = await (await ContentModel.create({
         userId: userId,
@@ -98,7 +96,7 @@ app.get("/api/v1/content", userMiddleware, async (req, res) => {
     })
 })
 
-app.delete("/api/v1/content", userMiddleware, async (req, res) => {
+app.delete("/api/v1/content", userMiddleware, async (req:Request, res:Response) => {
     const contentId = req.body.contentId;
     const id = req.params.id;
     await ContentModel.deleteMany({
@@ -111,13 +109,13 @@ app.delete("/api/v1/content", userMiddleware, async (req, res) => {
     
 })
 
-app.post("/api/v1/ping",(req,res)=>{
+app.post("/api/v1/ping",(req:Request, res:Response)=>{
     res.status(200).json({
         message:"pinged successfully"
     })
 })
 
-app.post("/api/v1/brain/share", userMiddleware, async (req, res) => {
+app.post("/api/v1/brain/share", userMiddleware, async (req:Request, res:Response) => {
     const share = req.body;
 
     if(share){
@@ -141,7 +139,7 @@ app.post("/api/v1/brain/share", userMiddleware, async (req, res) => {
     }
 })
 
-app.get("/api/v1/brain/:shareLink", async (req, res) => {
+app.get("/api/v1/brain/:shareLink", async (req:Request, res:Response) => {
     const hash = req.params.shareLink;
 
     const link = await LinkModel.findOne({

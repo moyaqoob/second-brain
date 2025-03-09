@@ -40,7 +40,7 @@ export const Button = ({
                     </span>
                 )}
                 <div className="font-medium">
-                    {title}
+                      {title}
                 </div>
             </div>
         </button>

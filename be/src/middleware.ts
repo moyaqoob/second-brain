@@ -12,7 +12,7 @@ export const userMiddleware = (req: Request, res: Response, next: NextFunction) 
             })
             return;    
         }
-        req.userId = (decoded as JwtPayload).id;
+        req.userId = decoded.id
         next()
     } else {
         res.status(403).json({

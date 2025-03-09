@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 300">
+  <!-- Background shapes -->
+  <circle cx="160" cy="150" r="120" fill="#e6f2ff" />
+  
+  <!-- Brain icon -->
+  <path d="M160 70 
+           C190 70, 215 90, 215 120
+           C215 145, 200 165, 175 170
+           C195 175, 210 195, 210 220
+           C210 245, 185 265, 155 265
+           C125 265, 100 245, 100 220
+           C100 195, 115 175, 135 170
+           C110 165, 95 145, 95 120
+           C95 90, 130 70, 160 70Z" 
+        fill="none" stroke="#0066cc" stroke-width="8" />
+  
+  <!-- Brain details/curves -->
+  <path d="M160 70 
+           C140 90, 130 105, 135 120
+           M155 265
+           C135 245, 125 230, 130 215" 
+        fill="none" stroke="#0066cc" stroke-width="8" />
+  
+  <!-- Connection nodes representing links -->
+  <circle cx="130" cy="110" r="8" fill="#0066cc" />
+  <circle cx="180" cy="115" r="8" fill="#0066cc" />
+  <circle cx="125" cy="190" r="8" fill="#0066cc" />
+  <circle cx="175" cy="195" r="8" fill="#0066cc" />
+  
+  <!-- Connection lines -->
+  <line x1="130" y1="110" x2="180" y2="115" stroke="#0066cc" stroke-width="4" />
+  <line x1="125" y1="190" x2="175" y2="195" stroke="#0066cc" stroke-width="4" />
+  <line x1="130" y1="110" x2="125" y2="190" stroke="#0066cc" stroke-width="4" />
+  <line x1="180" y1="115" x2="175" y2="195" stroke="#0066cc" stroke-width="4" />
+  
+  <!-- Text -->
+  <text x="290" y="150" font-family="Arial, sans-serif" font-size="50" font-weight="bold" fill="#0066cc">brainly</text>
+  <text x="290" y="180" font-family="Arial, sans-serif" font-size="16" fill="#0066cc">smart content storage</text>
+  
+  <!-- Social media icons suggestion -->
+  <path d="M290 200 L310 200" stroke="#0066cc" stroke-width="3" />
+  <circle cx="315" cy="200" r="5" fill="#0066cc" />
+  <path d="M330 200 L350 200" stroke="#0066cc" stroke-width="3" />
+  <rect x="355" y="195" width="10" height="10" fill="#0066cc" />
+</svg>

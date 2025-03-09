@@ -2,7 +2,7 @@ import { useRef } from "react"
 import { Button } from "../Components/button"
 import axios from "axios";
 import {BACKEND_URL} from "../config"
-import { data, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const usernameRef = useRef<HTMLInputElement>(null);
